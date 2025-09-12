@@ -1,13 +1,19 @@
 import { useState } from "react";
-import type { ColumnType, TaskType } from "../types/Types";
-import Column from "./Column";
-import { KanbanContext } from "./context/KanbanContext";
-import { rectIntersection, KeyboardSensor, PointerSensor } from "@dnd-kit/core";
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  rectIntersection,
+  KeyboardSensor,
+  PointerSensor,
+  useSensors,
+  useSensor,
+} from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
-import { useSensors, useSensor } from "@dnd-kit/core";
+import { KanbanContext } from "./context/KanbanContext";
+import Column from "./Column";
+import type { ColumnType, TaskType } from "../types/Types";
 import "../App.css";
+// import { INITIAL_TASKS } from "../assets/initial_tasks/InitialTasks";
 
 const COLUMNS: ColumnType[] = [
   { id: "TODO", title: "To do" },
@@ -15,41 +21,8 @@ const COLUMNS: ColumnType[] = [
   { id: "DONE", title: "Done" },
 ];
 
-const INITIAL_TASKS: TaskType[] = [
-  {
-    id: "1",
-    title: "Task One",
-    description: "This task in doable",
-    status: "TODO",
-  },
-  {
-    id: "2",
-    title: "Task Two",
-    description: "This task in doable",
-    status: "IN_PROGRESS",
-  },
-  {
-    id: "3",
-    title: "Task three",
-    description: "This task in doable",
-    status: "TODO",
-  },
-  {
-    id: "4",
-    title: "Task four",
-    description: "This task in doable",
-    status: "DONE",
-  },
-  {
-    id: "5",
-    title: "Task Five",
-    description: "This task in doable",
-    status: "IN_PROGRESS",
-  },
-];
-
 function KanbanBoard() {
-  const [tasks, setTasks] = useState<TaskType[]>(INITIAL_TASKS);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -94,7 +67,6 @@ function KanbanBoard() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 0 } }),
-    //useSensor(TouchSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
@@ -107,10 +79,7 @@ function KanbanBoard() {
       <KanbanContext.Provider value={{ tasks, setTasks }}>
         <div className="columnWrapper">
           {COLUMNS.map((column) => {
-            const columnTasks = tasks.filter((t) => t.status === column.id);
-            return (
-              <Column key={column.id} column={column} tasks={columnTasks} />
-            );
+            return <Column key={column.id} column={column} />;
           })}
         </div>
       </KanbanContext.Provider>
