@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useKanban } from "./context/KanbanContext";
+import { useKanban } from "../context/KanbanContext";
 import type { ColumnId } from "../types/Types";
 import "../App.css";
 
@@ -20,7 +20,7 @@ export default function AddTaskModal({ columnId, onClose }: TaskModalProps) {
     setTasks((prev) => [
       ...prev,
       {
-        id: (prev.length + 1).toString(),
+        id: Date.now().toString(),
         title,
         description,
         status: columnId,

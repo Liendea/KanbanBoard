@@ -11,7 +11,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
-import { useKanban } from "./context/KanbanContext";
+import { useKanban } from "../context/KanbanContext";
 import EditTaskModal from "./EditTaskModal";
 
 type ColumnProps = {
@@ -64,9 +64,9 @@ export default function Column({ column }: ColumnProps) {
           <h2>{columnTitle}</h2>
         )}
         {editTitleMode ? (
-          <SaveIcon handleClick={handleClick} />
+          <SaveIcon onClick={handleClick} />
         ) : (
-          <EditIcon handleClick={handleClick} />
+          <EditIcon onClick={handleClick} />
         )}
       </div>
 

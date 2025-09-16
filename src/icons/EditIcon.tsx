@@ -1,13 +1,13 @@
 import "../App.css";
 
 type EditIconProps = {
-  handleClick: () => void;
+  onClick: () => void;
 };
 
-function EditIcon({ handleClick }: EditIconProps) {
+function EditIcon({ onClick }: EditIconProps) {
   return (
     <svg
-      onClick={handleClick}
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

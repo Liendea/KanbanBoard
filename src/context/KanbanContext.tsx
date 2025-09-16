@@ -1,9 +1,11 @@
 import { createContext, useContext } from "react";
-import type { TaskType } from "../../types/Types";
+import type { TaskType } from "../types/Types";
 
 type KanbanContextType = {
   tasks: TaskType[] | null;
   setTasks: React.Dispatch<React.SetStateAction<TaskType[]>>;
+  archive: TaskType[] | null;
+  setArchive: React.Dispatch<React.SetStateAction<TaskType[] | null>>;
 };
 
 export const KanbanContext = createContext<KanbanContextType | null>(null);

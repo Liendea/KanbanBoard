@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   DndContext,
   rectIntersection,
@@ -9,9 +8,9 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
-import { KanbanContext } from "./context/KanbanContext";
+import { useKanban } from "../context/KanbanContext";
 import Column from "./Column";
-import type { ColumnType, TaskType } from "../types/Types";
+import type { ColumnType } from "../types/Types";
 import "../App.css";
 // import { INITIAL_TASKS } from "../assets/initial_tasks/InitialTasks";
 
@@ -22,7 +21,7 @@ const COLUMNS: ColumnType[] = [
 ];
 
 function KanbanBoard() {
-  const [tasks, setTasks] = useState<TaskType[]>([]);
+  const { setTasks } = useKanban();
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -76,13 +75,11 @@ function KanbanBoard() {
       onDragEnd={handleDragEnd}
       collisionDetection={rectIntersection}
     >
-      <KanbanContext.Provider value={{ tasks, setTasks }}>
-        <div className="columnWrapper">
-          {COLUMNS.map((column) => {
-            return <Column key={column.id} column={column} />;
-          })}
-        </div>
-      </KanbanContext.Provider>
+      <div className="columnWrapper">
+        {COLUMNS.map((column) => {
+          return <Column key={column.id} column={column} />;
+        })}
+      </div>
     </DndContext>
   );
 }

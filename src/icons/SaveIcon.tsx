@@ -1,11 +1,11 @@
 type SaveIconProps = {
-  handleClick: () => void;
+  onClick: () => void;
 };
 
-export default function SaveIcon({ handleClick }: SaveIconProps) {
+export default function SaveIcon({ onClick }: SaveIconProps) {
   return (
     <svg
-      onClick={handleClick}
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

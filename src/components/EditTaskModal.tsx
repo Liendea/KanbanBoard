@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useKanban } from "./context/KanbanContext";
+import { useKanban } from "../context/KanbanContext";
 import type { TaskType } from "../types/Types";
 import "../App.css";
 import DeleteIcon from "../icons/DeleteIcon";
+import ArchiveIcon from "../icons/ArchiveIcon";
 
 type EditTaskModalProps = {
   task: TaskType;
@@ -10,7 +11,7 @@ type EditTaskModalProps = {
 };
 
 export default function TaskModal({ task, onClose }: EditTaskModalProps) {
-  const { setTasks } = useKanban();
+  const { setTasks, setArchive } = useKanban();
 
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
@@ -31,11 +32,18 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
     onClose();
   }
 
+  function handleArchive(taskToArchive: TaskType) {
+    setArchive((prev) => (prev ? [...prev, taskToArchive] : [taskToArchive]));
+    setTasks((prev) => prev.filter((t) => t.id !== taskToArchive.id));
+    onClose();
+  }
+
   return (
     <div className="modalBackdrop">
       <div className="editModal">
+        <ArchiveIcon onClick={() => handleArchive(task)} />
         <h2>Edit Task</h2>
-        <DeleteIcon handleClick={() => handleDelete(task)} />
+        <DeleteIcon onClick={() => handleDelete(task)} />
         <input
           type="text"
           placeholder="Title"
