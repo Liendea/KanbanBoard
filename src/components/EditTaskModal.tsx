@@ -12,7 +12,7 @@ type EditTaskModalProps = {
 };
 
 export default function TaskModal({ task, onClose }: EditTaskModalProps) {
-  const { setTasks, setArchive } = useKanban();
+  const { setTasks, setArchive, isMobileView } = useKanban();
 
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
@@ -44,6 +44,16 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
       <div className={modalStyles.editModal}>
         <ArchiveIcon onClick={() => handleArchive(task)} />
         <h2>Edit Task</h2>
+        {isMobileView && (
+          <div className={modalStyles.moveTask}>
+            <p>Flytta till: </p>
+            <select>
+              <option value="TODO">To Do</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="DONE">Done</option>
+            </select>
+          </div>
+        )}
         <DeleteIcon onClick={() => handleDelete(task)} />
         <input
           type="text"

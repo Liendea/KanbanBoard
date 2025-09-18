@@ -37,6 +37,13 @@
 
 .editModal {
   position: relative;
+
+  .moveTask {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 95%;
+  }
 }
 
 .archiveModal {
