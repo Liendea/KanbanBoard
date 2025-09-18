@@ -94,6 +94,7 @@ export default function KanbanBoard() {
         {isMobileView ? (
           // Mobilvy: visa endast kolumn från URL
           <Column
+            key={activeColumn!.id} // 👈 tvingar React att mounta om vid kolumnbyte
             column={activeColumn!}
             columnIndex={COLUMNS.findIndex((c) => c.id === activeColumn!.id)}
           />

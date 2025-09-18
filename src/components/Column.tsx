@@ -82,6 +82,7 @@ export default function Column({ column, columnIndex, onClick }: ColumnProps) {
             onClick={() => {
               if (onClick) onClick(); // desktop detaljvy
               navigate(`/kanban/${column.id}`); // uppdatera URL för mobilvy
+              console.log(column.title);
             }}
           >
             {columnTitle}

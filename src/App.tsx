@@ -44,8 +44,8 @@ function App() {
         {/* Routes */}
 
         <Routes>
-          <Route path="/kanban/:columnId" element={<KanbanBoard />} />
           <Route path="/kanban" element={<KanbanBoard />} />
+          <Route path="/kanban/:columnId" element={<KanbanBoard />} />
           {/* Redirect */}
           <Route path="*" element={<Navigate to="/kanban" replace />} />
         </Routes>
