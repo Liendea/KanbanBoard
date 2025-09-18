@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useKanban } from "../context/KanbanContext";
 import type { ColumnId } from "../types/Types";
-import "../App.css";
+
+import modalStyles from "../styles/Modals.module.scss";
+import "../styles/Global.scss";
 
 type TaskModalProps = {
   columnId: ColumnId;
@@ -31,9 +33,10 @@ export default function AddTaskModal({ columnId, onClose }: TaskModalProps) {
   }
 
   return (
-    <div className="modalBackdrop">
-      <div className="modal">
+    <div className={modalStyles.modalBackdrop}>
+      <div className={modalStyles.modal}>
         <h2>New Task for {columnId}</h2>
+
         <input
           type="text"
           placeholder="Title"

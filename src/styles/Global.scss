@@ -1,0 +1,123 @@
+@use "./MediaQueries" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(28, 212, 212);
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+
+  @include mobile {
+    justify-content: flex-start;
+  }
+  @include tablet {
+    justify-content: flex-start;
+  }
+  @include desktop {
+  }
+}
+
+/* ========= BUTTONS ========= */
+
+button {
+  padding: 1rem;
+  width: 90%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.634);
+  cursor: pointer;
+  border: none;
+  margin: 0 auto 0 auto;
+}
+
+button:hover {
+  background-color: azure;
+  cursor: pointer;
+}
+
+.addTaskButton {
+  margin-top: auto;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeDetailViewBtn {
+  width: auto;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+/* ========= INPUT ========= */
+
+input,
+textarea {
+  width: 90%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.634);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 100px;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+.drop-placeholder {
+  min-height: 20px; /* liten yta längst ner */
+}
+
+/* ========= ICONS   ========= */
+.editIcon,
+.saveIcon,
+.plusIcon,
+.deleteIcon,
+.archiveIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: black;
+}
+
+.editIcon:hover,
+.saveIcon:hover,
+.deleteIcon:hover,
+.archiveIcon:hover {
+  color: red;
+}
+
+.deleteIcon {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+}
+
+.archiveIcon {
+  position: absolute;
+  left: 30px;
+  top: 25px;
+}
+
+.plusIcon {
+  margin-right: 10px;
+}

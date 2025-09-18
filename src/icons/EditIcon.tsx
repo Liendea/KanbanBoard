@@ -1,4 +1,4 @@
-import "../App.css";
+import "../styles/Global.scss";
 
 type EditIconProps = {
   onClick: () => void;

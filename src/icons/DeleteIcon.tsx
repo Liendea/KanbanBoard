@@ -1,4 +1,4 @@
-import "../App.css";
+import "../styles/Global.scss";
 
 type DeleteIconProps = {
   onClick: () => void;

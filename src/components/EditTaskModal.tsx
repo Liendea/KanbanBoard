@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useKanban } from "../context/KanbanContext";
 import type { TaskType } from "../types/Types";
-import "../App.css";
 import DeleteIcon from "../icons/DeleteIcon";
 import ArchiveIcon from "../icons/ArchiveIcon";
+import modalStyles from "../styles/Modals.module.scss";
+import "../styles/Global.scss";
 
 type EditTaskModalProps = {
   task: TaskType;
@@ -39,8 +40,8 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
   }
 
   return (
-    <div className="modalBackdrop">
-      <div className="editModal">
+    <div className={modalStyles.modalBackdrop}>
+      <div className={modalStyles.editModal}>
         <ArchiveIcon onClick={() => handleArchive(task)} />
         <h2>Edit Task</h2>
         <DeleteIcon onClick={() => handleDelete(task)} />

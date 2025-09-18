@@ -1,24 +1,56 @@
-import "./App.css";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ArchiveModal from "./components/ArchiveModal";
 import KanbanBoard from "./components/KanbanBoard";
 import ArchiveIcon from "./icons/ArchiveIcon";
-import { useState } from "react";
+import SmallDeviceMenu from "./components/SmallDeviceMenu";
+import "./styles/Global.scss";
+import { useKanban } from "./context/KanbanContext";
 
 function App() {
   const [showArchiveModal, setShowArchiveModal] = useState<boolean>(false);
+  const { isMobileView, setIsMobileView } = useKanban();
 
-  function handleShowArchive() {
-    setShowArchiveModal(!showArchiveModal);
-  }
+  // hantera Resizing
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 900);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="App">
-      <ArchiveIcon onClick={handleShowArchive} />
-      {showArchiveModal && (
-        <ArchiveModal onClose={() => setShowArchiveModal(false)} />
-      )}
-      <KanbanBoard />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        {/* Mobilvy */}
+        {isMobileView ? (
+          <>
+            <SmallDeviceMenu />
+          </>
+        ) : (
+          <>
+            <ArchiveIcon
+              onClick={() => setShowArchiveModal(!showArchiveModal)}
+            />
+            {showArchiveModal && (
+              <ArchiveModal onClose={() => setShowArchiveModal(false)} />
+            )}
+          </>
+        )}
+
+        {/* Routes */}
+
+        <Routes>
+          <Route path="/kanban/:columnId" element={<KanbanBoard />} />
+          <Route path="/kanban" element={<KanbanBoard />} />
+          {/* Redirect */}
+          <Route path="*" element={<Navigate to="/kanban" replace />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,7 +1,9 @@
 import type { TaskType } from "../types/Types";
-import "../App.css";
+
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import taskStyles from "../styles/Task.module.scss";
+import "../styles/Global.scss";
 
 type TaskCardProps = {
   task: TaskType;
@@ -23,12 +25,12 @@ export default function TaskCard({ task, onClick }: TaskCardProps) {
       style={style}
       {...attributes}
       {...listeners}
-      className="taskCard"
+      className={taskStyles.taskCard}
       tabIndex={0}
       onClick={onClick}
     >
-      <h3 className="taskTitle">{task.title}</h3>
-      <p className="taskDescription">{task.description}</p>
+      <h3 className={taskStyles.taskTitle}>{task.title}</h3>
+      <p className={taskStyles.taskDescription}>{task.description}</p>
     </div>
   );
 }

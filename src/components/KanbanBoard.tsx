@@ -8,11 +8,14 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
+import { useState } from "react";
 import { useKanban } from "../context/KanbanContext";
 import Column from "./Column";
 import type { ColumnType } from "../types/Types";
-import "../App.css";
-// import { INITIAL_TASKS } from "../assets/initial_tasks/InitialTasks";
+import { useParams } from "react-router-dom";
+
+import columnStyles from "../styles/Column.module.scss";
+import "../styles/Global.scss";
 
 const COLUMNS: ColumnType[] = [
   { id: "TODO", title: "To do" },
@@ -20,8 +23,25 @@ const COLUMNS: ColumnType[] = [
   { id: "DONE", title: "Done" },
 ];
 
-function KanbanBoard() {
-  const { setTasks } = useKanban();
+export default function KanbanBoard() {
+  const { setTasks, isMobileView } = useKanban();
+  const { columnId } = useParams();
+
+  // Desktop: hantera detaljvy
+  const [detailColumnId, setDetailColumnId] = useState<string | null>(null);
+
+  // Mobilvy: URL styr kolumnen
+  const activeColumn = columnId
+    ? COLUMNS.find((c) => c.id === columnId)
+    : isMobileView
+    ? COLUMNS[0]
+    : null;
+
+  // DnD-kit sensors
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 0 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -29,14 +49,12 @@ function KanbanBoard() {
 
     const activeId = active.id;
     const overId = over.id;
-
     if (activeId === overId) return;
 
     setTasks((prev) => {
       const activeTask = prev.find((t) => t.id === activeId);
       if (!activeTask) return prev;
 
-      // 1. Kolla om man släpper på en kolumn
       const overColumn = COLUMNS.find((col) => col.id === overId);
       if (overColumn) {
         return prev.map((t) =>
@@ -44,30 +62,27 @@ function KanbanBoard() {
         );
       }
 
-      // 2. Kolla om man släpper på en task
       const overTask = prev.find((t) => t.id === overId);
       if (overTask) {
-        // Om tasken ligger i en annan kolumn -> byt kolumn
         if (overTask.status !== activeTask.status) {
           return prev.map((t) =>
             t.id === activeId ? { ...t, status: overTask.status } : t
           );
         }
+        const columnTasks = prev.filter((t) => t.status === activeTask.status);
+        const activeIndex = columnTasks.findIndex((t) => t.id === activeId);
+        const overIndex = columnTasks.findIndex((t) => t.id === overId);
+        const newColumnTasks = arrayMove(columnTasks, activeIndex, overIndex);
 
-        // Annars flytta ordning inom samma kolumn
-        const activeIndex = prev.findIndex((t) => t.id === activeId);
-        const overIndex = prev.findIndex((t) => t.id === overId);
-        return arrayMove(prev, activeIndex, overIndex);
+        return prev.map((t) => {
+          const found = newColumnTasks.find((nt) => nt.id === t.id);
+          return found ? found : t;
+        });
       }
 
       return prev;
     });
   }
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 0 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  );
 
   return (
     <DndContext
@@ -75,13 +90,39 @@ function KanbanBoard() {
       onDragEnd={handleDragEnd}
       collisionDetection={rectIntersection}
     >
-      <div className="columnWrapper">
-        {COLUMNS.map((column) => {
-          return <Column key={column.id} column={column} />;
-        })}
+      <div className={columnStyles.columnWrapper}>
+        {isMobileView ? (
+          // Mobilvy: visa endast kolumn från URL
+          <Column
+            column={activeColumn!}
+            columnIndex={COLUMNS.findIndex((c) => c.id === activeColumn!.id)}
+          />
+        ) : detailColumnId ? (
+          // Desktop detaljvy: visa endast den valda kolumnen
+          <div className={columnStyles.columnDetail}>
+            <Column
+              column={COLUMNS.find((c) => c.id === detailColumnId)!}
+              columnIndex={COLUMNS.findIndex((c) => c.id === detailColumnId)!}
+            />
+            <button
+              className="closeDetailViewBtn"
+              onClick={() => setDetailColumnId(null)}
+            >
+              X
+            </button>
+          </div>
+        ) : (
+          // Desktop full board: visa alla kolumner
+          COLUMNS.map((column, index) => (
+            <Column
+              key={column.id}
+              column={column}
+              columnIndex={index}
+              onClick={() => setDetailColumnId(column.id)} // öppna detaljvy desktop
+            />
+          ))
+        )}
       </div>
     </DndContext>
   );
 }
-
-export default KanbanBoard;

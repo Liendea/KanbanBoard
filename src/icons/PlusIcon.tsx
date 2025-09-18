@@ -1,3 +1,5 @@
+import "../styles/Global.scss";
+
 export default function PlusIcon() {
   return (
     <svg

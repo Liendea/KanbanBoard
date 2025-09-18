@@ -3,6 +3,7 @@ export type ColumnId = "TODO" | "IN_PROGRESS" | "DONE";
 export type ColumnType = {
   id: ColumnId;
   title: string;
+  index?: number;
 };
 
 export type TaskType = {

@@ -9,9 +9,26 @@ type KanbanProviderProps = {
 export function KanbanProvider({ children }: KanbanProviderProps) {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [archive, setArchive] = useState<TaskType[] | null>(null);
+  const [columnTitles, setColumnTitles] = useState<string[]>([
+    "To Do",
+    "In Progress",
+    "Done",
+  ]);
+  const [isMobileView, setIsMobileView] = useState<boolean>(false);
 
   return (
-    <KanbanContext.Provider value={{ tasks, setTasks, archive, setArchive }}>
+    <KanbanContext.Provider
+      value={{
+        tasks,
+        setTasks,
+        archive,
+        setArchive,
+        columnTitles,
+        setColumnTitles,
+        isMobileView,
+        setIsMobileView,
+      }}
+    >
       {children}
     </KanbanContext.Provider>
   );

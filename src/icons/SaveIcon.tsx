@@ -1,3 +1,5 @@
+import "../styles/Global.scss";
+
 type SaveIconProps = {
   onClick: () => void;
 };
