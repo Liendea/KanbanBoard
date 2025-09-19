@@ -52,8 +52,11 @@ export function useDnd(COLUMNS: ColumnType[]) {
         const newColumnTasks = arrayMove(columnTasks, activeIndex, overIndex);
 
         return prev.map((t) => {
-          const found = newColumnTasks.find((nt) => nt.id === t.id);
-          return found ? found : t;
+          if (t.status === activeTask.status) {
+            const index = columnTasks.findIndex((ct) => ct.id === t.id);
+            return newColumnTasks[index];
+          }
+          return t;
         });
       }
 
