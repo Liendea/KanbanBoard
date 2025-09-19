@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useKanban } from "../context/KanbanContext";
 import type { ColumnId } from "../types/Types";
-
 import modalStyles from "../styles/Modals.module.scss";
 import "../styles/Global.scss";
 

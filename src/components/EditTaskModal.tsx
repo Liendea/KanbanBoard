@@ -43,7 +43,7 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
 
   return (
     <div className={modalStyles.modalBackdrop}>
-      <div className={modalStyles.editModal}>
+      <div className={modalStyles.modal}>
         <ArchiveIcon onClick={() => handleArchive(task)} />
         <h2>Edit Task</h2>
         {isMobileView && (

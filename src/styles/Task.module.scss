@@ -1,4 +1,6 @@
-/* ========= TASK  ========= */
+@use "./Variables" as *;
+
+/*========= TASK  ========= */
 
 .taskArea {
   width: 100%;
@@ -10,13 +12,12 @@
   overflow-x: hidden;
 
   .taskCard {
-    background-color: rgba(255, 255, 255, 0.634);
+    background-color: $taskCard-color;
     width: 95%;
     height: auto;
     padding: 1rem;
     border-radius: 10px;
     cursor: pointer;
-
     word-wrap: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
