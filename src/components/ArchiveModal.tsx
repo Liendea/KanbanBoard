@@ -21,7 +21,7 @@ export default function ArchiveModal({ onClose }: ArchiveModalProps) {
   return (
     <div className={modalStyles.modalBackdrop}>
       <div className={`${modalStyles.modal} ${modalStyles.archiveModal}`}>
-        <h2>Arkiverade uppgifter</h2>
+        <h2>Arkiv</h2>
         <div className={modalStyles.taskContainer}>
           {archive?.map((task) => (
             <div key={task.id} className={modalStyles.archivedTask}>

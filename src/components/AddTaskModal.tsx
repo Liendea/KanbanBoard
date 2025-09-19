@@ -35,7 +35,7 @@ export default function AddTaskModal({ columnId, onClose }: TaskModalProps) {
   return (
     <div className={modalStyles.modalBackdrop}>
       <div className={modalStyles.modal}>
-        <h2>New Task for {columnId}</h2>
+        <h2>New Task</h2>
 
         <input
           type="text"

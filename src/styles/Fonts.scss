@@ -1,0 +1,42 @@
+// FONTS
+
+@use "./MediaQueries" as *;
+@use "./Variables" as *;
+
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: $text-color;
+}
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+
+  // Media query för mobil
+  @include mobile {
+    font-size: 1.2rem;
+  }
+  // Media query för mobil
+  @include tablet {
+    font-size: 1.5 rem;
+  }
+}
+
+p {
+  font-size: 1rem;
+
+  // Media query för mobil
+  @include mobile {
+    font-size: 12px;
+  }
+  // Media query för mobil
+  @include tablet {
+    font-size: 14px;
+  }
+}
