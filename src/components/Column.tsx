@@ -3,7 +3,7 @@ import TaskCard from "./TaskCard";
 import { useState } from "react";
 import EditIcon from "../icons/EditIcon";
 import SaveIcon from "../icons/SaveIcon";
-import AddTaskModal from "./AddTaskModal";
+
 import PlusIcon from "../icons/PlusIcon";
 import {
   SortableContext,
@@ -11,9 +11,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
 import { useKanban } from "../context/KanbanContext";
-import EditTaskModal from "./EditTaskModal";
 import { useNavigate } from "react-router-dom";
-
 import styles from "../styles/Column.module.scss";
 import taskStyles from "../styles/Task.module.scss";
 import "../styles/Global.scss";
@@ -21,10 +19,18 @@ import "../styles/Global.scss";
 type ColumnProps = {
   column: ColumnType;
   columnIndex: number;
-  onClick?: () => void; // valfri prop för click
+  onClick?: () => void;
+  onClickTask?: (task: TaskType) => void;
+  onAddTask?: (columnId: string) => void;
 };
 
-export default function Column({ column, columnIndex, onClick }: ColumnProps) {
+export default function Column({
+  column,
+  columnIndex,
+  onClick,
+  onAddTask,
+  onClickTask,
+}: ColumnProps) {
   const { tasks, columnTitles, setColumnTitles } = useKanban();
   const storedColumnTitle = columnTitles?.[columnIndex] ?? column.title;
 
@@ -35,9 +41,6 @@ export default function Column({ column, columnIndex, onClick }: ColumnProps) {
 
   const [editTitleMode, setEditTitleMode] = useState(false);
   const [columnTitle, setColumnTitle] = useState(storedColumnTitle);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
 
   // gör hela kolumnen till en droppable
   const { setNodeRef } = useDroppable({
@@ -52,12 +55,6 @@ export default function Column({ column, columnIndex, onClick }: ColumnProps) {
     setColumnTitles((prev) =>
       prev.map((title, idx) => (idx === columnIndex ? columnTitle : title))
     );
-  }
-
-  // Välj task och visa editmodal
-  function handleTaskClick(task: TaskType) {
-    setSelectedTask(task);
-    setShowEditModal(true);
   }
 
   return (
@@ -111,7 +108,7 @@ export default function Column({ column, columnIndex, onClick }: ColumnProps) {
               <TaskCard
                 key={task.id}
                 task={task}
-                onClick={() => handleTaskClick(task)}
+                onClick={() => onClickTask?.(task)}
               />
             ))
           ) : (
@@ -122,24 +119,13 @@ export default function Column({ column, columnIndex, onClick }: ColumnProps) {
 
       {/* Add task button */}
       {column.id === "TODO" && (
-        <button className="addTaskButton" onClick={() => setShowAddModal(true)}>
+        <button
+          className="addTaskButton"
+          onClick={() => onAddTask?.(column.id)}
+        >
           <PlusIcon />
           Add task
         </button>
-      )}
-
-      {/* Modals */}
-      {showAddModal && (
-        <AddTaskModal
-          columnId={column.id}
-          onClose={() => setShowAddModal(false)}
-        />
-      )}
-      {showEditModal && selectedTask && (
-        <EditTaskModal
-          task={selectedTask}
-          onClose={() => setShowEditModal(false)}
-        />
       )}
     </div>
   );

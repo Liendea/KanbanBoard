@@ -38,7 +38,9 @@ export default function ArchiveModal({ onClose }: ArchiveModalProps) {
               >
                 {task.status}
               </p>
-              <DeleteIcon onClick={() => handleDelete(task)} />
+              <div className={modalStyles.archiveDeleteIcon}>
+                <DeleteIcon onClick={() => handleDelete(task)} />
+              </div>
 
               <h3>{task.title}</h3>
               <p>{task.description}</p>
