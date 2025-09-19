@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "../styles/Global.scss";
 import styles from "../styles/SmallDeviceMenu.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
+import ArchiveModal from "./ArchiveModal";
 
 export default function SmallDeviceMenu() {
   const [showArchiveModal, setShowArchiveModal] = useState<boolean>(false);
@@ -27,6 +28,9 @@ export default function SmallDeviceMenu() {
   return (
     <div className={styles.smallDeviceMenu}>
       <ArchiveIcon onClick={() => setShowArchiveModal(!showArchiveModal)} />
+      {showArchiveModal && (
+        <ArchiveModal onClose={() => setShowArchiveModal(false)} />
+      )}
       <select value={selectedColumn} onChange={handleChange}>
         <option value="TODO">To Do</option>
         <option value="IN_PROGRESS">In Progress</option>
