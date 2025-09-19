@@ -16,13 +16,15 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
 
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
+  const [newStatus, setNewStatus] = useState(task.status);
 
   function handleSave() {
     if (!title.trim()) return;
-
     // Uppdatera befintlig task
     setTasks((prev) =>
-      prev.map((t) => (t.id === task.id ? { ...t, title, description } : t))
+      prev.map((t) =>
+        t.id === task.id ? { ...t, title, description, status: newStatus } : t
+      )
     );
 
     onClose();
@@ -47,7 +49,12 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
         {isMobileView && (
           <div className={modalStyles.moveTask}>
             <p>Flytta till: </p>
-            <select>
+            <select
+              value={newStatus}
+              onChange={(e) =>
+                setNewStatus(e.target.value as "TODO" | "IN_PROGRESS" | "DONE")
+              }
+            >
               <option value="TODO">To Do</option>
               <option value="IN_PROGRESS">In Progress</option>
               <option value="DONE">Done</option>

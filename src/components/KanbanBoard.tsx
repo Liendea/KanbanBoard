@@ -1,21 +1,12 @@
-import {
-  DndContext,
-  rectIntersection,
-  KeyboardSensor,
-  PointerSensor,
-  useSensors,
-  useSensor,
-} from "@dnd-kit/core";
-import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import type { DragEndEvent } from "@dnd-kit/core";
 import { useState } from "react";
-import { useKanban } from "../context/KanbanContext";
 import Column from "./Column";
 import type { ColumnType } from "../types/Types";
-import { useParams } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
 import columnStyles from "../styles/Column.module.scss";
 import "../styles/Global.scss";
+import { DndContext, rectIntersection } from "@dnd-kit/core";
+import { useDnd } from "../hooks/useDnd";
+import { useKanban } from "../context/KanbanContext";
 
 const COLUMNS: ColumnType[] = [
   { id: "TODO", title: "To do" },
@@ -24,8 +15,11 @@ const COLUMNS: ColumnType[] = [
 ];
 
 export default function KanbanBoard() {
-  const { setTasks, isMobileView } = useKanban();
+  const { isMobileView } = useKanban();
   const { columnId } = useParams();
+  const navigate = useNavigate();
+  //DND hook
+  const { sensors, handleDragEnd } = useDnd(COLUMNS);
 
   // Desktop: hantera detaljvy
   const [detailColumnId, setDetailColumnId] = useState<string | null>(null);
@@ -37,51 +31,9 @@ export default function KanbanBoard() {
     ? COLUMNS[0]
     : null;
 
-  // DnD-kit sensors
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 0 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
-  );
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    if (!over) return;
-
-    const activeId = active.id;
-    const overId = over.id;
-    if (activeId === overId) return;
-
-    setTasks((prev) => {
-      const activeTask = prev.find((t) => t.id === activeId);
-      if (!activeTask) return prev;
-
-      const overColumn = COLUMNS.find((col) => col.id === overId);
-      if (overColumn) {
-        return prev.map((t) =>
-          t.id === activeId ? { ...t, status: overColumn.id } : t
-        );
-      }
-
-      const overTask = prev.find((t) => t.id === overId);
-      if (overTask) {
-        if (overTask.status !== activeTask.status) {
-          return prev.map((t) =>
-            t.id === activeId ? { ...t, status: overTask.status } : t
-          );
-        }
-        const columnTasks = prev.filter((t) => t.status === activeTask.status);
-        const activeIndex = columnTasks.findIndex((t) => t.id === activeId);
-        const overIndex = columnTasks.findIndex((t) => t.id === overId);
-        const newColumnTasks = arrayMove(columnTasks, activeIndex, overIndex);
-
-        return prev.map((t) => {
-          const found = newColumnTasks.find((nt) => nt.id === t.id);
-          return found ? found : t;
-        });
-      }
-
-      return prev;
-    });
+  function closeDetailView() {
+    setDetailColumnId(null);
+    navigate("/kanban");
   }
 
   return (
@@ -105,10 +57,7 @@ export default function KanbanBoard() {
               column={COLUMNS.find((c) => c.id === detailColumnId)!}
               columnIndex={COLUMNS.findIndex((c) => c.id === detailColumnId)!}
             />
-            <button
-              className="closeDetailViewBtn"
-              onClick={() => setDetailColumnId(null)}
-            >
+            <button className="closeDetailViewBtn" onClick={closeDetailView}>
               X
             </button>
           </div>
