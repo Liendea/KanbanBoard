@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# 📝 Kanban Board
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ett interaktivt Kanban-projekt byggt med **React**, **TypeScript** och **dnd-kit**.  
+Projektet gör det möjligt att skapa, redigera, flytta och arkivera uppgifter i olika kolumner.
 
-Currently, two official plugins are available:
+Desktop:
+<img width="1911" height="983" alt="Skärmavbild 2025-09-20 kl  10 27 09" src="https://github.com/user-attachments/assets/b8ad0d70-dacc-46d7-81da-491b21a6f04f" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Small devices:
+<img width="612" height="1126" alt="Skärmbild 2025-09-20 klockan 10 29 28 fm" src="https://github.com/user-attachments/assets/47656bc5-bffe-4e29-bfcf-f0ce7547b7be" />
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Funktioner
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 📌 **Kolumner**: "To do", "In Progress", "Done"  
+- ➕ **Lägg till uppgifter** via modal
+- ✏️ **Redigera uppgifter** i modal
+- 🗑️ **Arkivera eller ta bort uppgifter**
+- 📱 **Responsiv design** – fungerar på både desktop och mobil
+- 🖱️ **Drag & Drop** (via `@dnd-kit/core`)
+- 🗂️ **Spara kolumnnamn** med inline-redigering
+- 💾 **Context API** för global state management
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Teknikstack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- [React](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) (byggverktyg)
+- [dnd-kit](https://dndkit.com/) för drag & drop
+- [React Router](https://reactrouter.com/) för navigering
+- SCSS-moduler för styling
+- Context API för global state
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📂 Projektstruktur (förenklad)
+
+src/
+├── components/ # Återanvändbara UI-komponenter (Column, TaskCard, Modals)
+├── context/ # Global KanbanContext
+├── hooks/ # Custom hooks (useDnd, useKanbanModals, etc.)
+├── constants/ # T.ex. COLUMNS definition
+├── styles/ # SCSS-moduler
+├── types/ # TypeScript-typer
+└── App.tsx # Rotkomponent
+
+
+Vidare utveckling:
+⬜ Filtrering/sökfunktion för tasks
+⬜ Möjlighet att ändra färger/teman
+⬜ Möjlighet att återställa arkiverade uppgifter
+⬜ Spara data i Local Storage eller backend
+⬜ Dra och släpp kolumner (inte bara tasks)
+
+
+Utvecklad av : Linda Bengtsson
+mail: bengtsson.linda-outlook.com
+instagram: liendea.dev
+
