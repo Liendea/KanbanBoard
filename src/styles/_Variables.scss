@@ -2,30 +2,25 @@
 $font-size-xs: 12px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 20px;
-
-$font-weight-normal: 400;
-$font-weight-bold: 700;
-
-$line-height-base: 1.5;
+$font-size-lg: 24px;
+$font-size-xl: 32px;
 
 // COLOR
 $primary-color: white;
-$secondary-color: white;
+$secondary-color: azure;
 $backdrop-color: rgba(0, 0, 0, 0.121);
 $taskCard-color: rgba(255, 255, 255, 0.634);
-$background-color: white;
 $text-color: black;
 $border-color: #d1d5db;
 
 // PADDING / MARGIN / GAP
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
+$spacing-xs: 5px;
+$spacing-sm: 8px; // 0.5rem
+$spacing-md: 10px;
+$spacing-lg: 16px; // 1rem
+$spacing-xl: 20px;
+$spacing-xxl: 32px; // 2rem
 
 // BORDER RADIUS
-$border-radius-sm: 5px;
 $border-radius-md: 10px;
-$border-width: 1px;
+$border-radius-lg: 20px;

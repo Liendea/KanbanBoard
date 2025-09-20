@@ -1,0 +1,33 @@
+@use "./MediaQueries" as *;
+@use "./Variables" as *;
+
+// FONTSSIZES
+
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  font-size: $font-size-xl;
+}
+
+h2 {
+  font-size: $font-size-lg;
+}
+
+h3 {
+  font-size: $font-size-md;
+}
+
+p {
+  font-size: $font-size-md;
+
+  // Media query för mobil
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+  // Media query för mobil
+  @include tablet {
+    font-size: $font-size-sm;
+  }
+}

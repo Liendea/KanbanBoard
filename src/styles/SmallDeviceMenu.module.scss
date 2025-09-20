@@ -1,21 +1,25 @@
+@use "./Variables" as *;
+
 .smallDeviceMenu {
-  background-color: rgba(255, 255, 255, 0.634);
+  background-color: $taskCard-color;
   width: 100%;
   height: 50px;
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-top: 0;
+  padding-top: $spacing-md;
+  padding-left: $spacing-lg;
 }
 
 select {
   height: 30px;
-  margin: 10px;
-  border-radius: 10px;
+  margin: $spacing-md;
+  border-radius: $border-radius-md;
   border: none;
-  padding: 0 10px;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 255, 0.634);
+  padding: 0 $spacing-md;
+  font-size: $font-size-md;
+  background-color: $primary-color;
   cursor: pointer;
 }
