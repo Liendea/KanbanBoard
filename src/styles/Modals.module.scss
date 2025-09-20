@@ -21,6 +21,7 @@
   padding: $spacing-lg;
   border-radius: $border-radius-md;
   width: 50%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,13 +34,8 @@
   }
 
   @include tablet {
-    width: 80%;
+    width: 95%;
     padding: $spacing-lg;
-    margin-bottom: 20%;
-  }
-
-  @include mobile {
-    margin-bottom: 50%;
   }
 
   .moveTask {
@@ -125,5 +121,10 @@
     .done {
       background-color: lightcoral;
     }
+  }
+
+  @include mobile {
+    height: 100svh;
+    width: 100%;
   }
 }
