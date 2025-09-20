@@ -4,10 +4,12 @@ Ett interaktivt Kanban-projekt byggt med **React**, **TypeScript** och **dnd-kit
 Projektet gör det möjligt att skapa, redigera, flytta och arkivera uppgifter i olika kolumner.
 
 Desktop:
+
 <img width="1911" height="983" alt="Skärmavbild 2025-09-20 kl  10 27 09" src="https://github.com/user-attachments/assets/b8ad0d70-dacc-46d7-81da-491b21a6f04f" />
 
 Small devices:
-<img width="612" height="1126" alt="Skärmbild 2025-09-20 klockan 10 29 28 fm" src="https://github.com/user-attachments/assets/47656bc5-bffe-4e29-bfcf-f0ce7547b7be" />
+
+<img width="306" height="563" alt="Skärmbild 2025-09-20 klockan 10 29 28 fm" src="https://github.com/user-attachments/assets/47656bc5-bffe-4e29-bfcf-f0ce7547b7be" />
 
 ---
 
