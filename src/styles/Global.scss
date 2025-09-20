@@ -11,7 +11,7 @@ body {
   background-image: url("../images/cloud_background.jpg");
   background-repeat: none;
   background-size: cover;
-  background-color: rgb(28, 212, 212);
+  background-color: $backdrop-color;
   width: 100%;
   height: 100vh;
   height: 100dvh;
@@ -41,18 +41,18 @@ body {
 /* ========= BUTTONS ========= */
 
 button {
-  padding: 1rem;
+  padding: $spacing-lg;
   width: 90%;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.634);
+  border-radius: $border-radius-md;
+  background-color: $taskCard-color;
   cursor: pointer;
   border: none;
   margin: 0 auto 0 auto;
-  border: 1px solid rgba(128, 128, 128, 0.576);
+  border: 1px solid $border-color;
 
   // Media query för mobil
   @media (max-width: 900px) {
-    padding: 1rem;
+    padding: $spacing-lg;
   }
 }
 
@@ -66,14 +66,14 @@ button {
 
 .closeDetailViewBtn {
   width: auto;
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
+  padding: $spacing-sm $spacing-lg;
+  margin-top: $spacing-lg;
 }
 
 .resetBtn {
-  margin-top: 1rem;
+  margin-top: $spacing-lg;
   background-color: $primary-color;
-  padding: 0.5rem;
+  padding: $spacing-sm;
 }
 
 button:hover {
@@ -86,19 +86,19 @@ button:hover {
 input,
 textarea {
   width: 90%;
-  padding: 10px;
+  padding: $spacing-md;
   background-color: $primary-color;
   border: none;
   outline: none;
-  border-radius: 10px;
+  border-radius: $border-radius-md;
   font-family: inherit;
-  font-size: 1rem;
-  border: 1px solid rgba(128, 128, 128, 0.576);
+  font-size: $font-size-md;
+  border: 1px solid $border-color;
 }
 
 textarea {
   height: 100px;
-  margin-bottom: 10px;
+  margin-bottom: $spacing-md;
   resize: none;
 }
 
@@ -115,38 +115,22 @@ textarea {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  color: black;
-}
-
-.editIcon:hover,
-.saveIcon:hover,
-.deleteIcon:hover,
-.archiveIcon:hover {
-  color: red;
-}
-
-.deleteIcon {
-  position: absolute;
-  right: 30px;
-  top: 25px;
-
-  @include tablet {
-    right: 20px;
-    top: 20px;
-  }
-}
-
-.archiveIcon {
-  position: absolute;
-  left: 30px;
-  top: 25px;
-
-  @include tablet {
-    left: 20px;
-    top: 20px;
-  }
+  color: $text-color;
 }
 
 .plusIcon {
-  margin-right: 10px;
+  margin-right: $spacing-md;
+}
+
+.appArchiveIcon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  .archiveIcon {
+    width: 50%;
+    height: 50%;
+  }
 }

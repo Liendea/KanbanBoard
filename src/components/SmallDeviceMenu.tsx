@@ -27,7 +27,9 @@ export default function SmallDeviceMenu() {
 
   return (
     <div className={styles.smallDeviceMenu}>
-      <ArchiveIcon onClick={() => setShowArchiveModal(!showArchiveModal)} />
+      <div className={styles.smallDeviceArchiveIcon}>
+        <ArchiveIcon onClick={() => setShowArchiveModal(!showArchiveModal)} />
+      </div>
       {showArchiveModal && (
         <ArchiveModal onClose={() => setShowArchiveModal(false)} />
       )}

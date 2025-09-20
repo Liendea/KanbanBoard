@@ -44,8 +44,11 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
   return (
     <div className={modalStyles.modalBackdrop}>
       <div className={modalStyles.modal}>
-        <ArchiveIcon onClick={() => handleArchive(task)} />
-        <h2>Edit Task</h2>
+        <div className={modalStyles.editModalHeader}>
+          <ArchiveIcon onClick={() => handleArchive(task)} />
+          <h2>Edit Task</h2>
+          <DeleteIcon onClick={() => handleDelete(task)} />
+        </div>
         {isMobileView && (
           <div className={modalStyles.moveTask}>
             <p>Flytta till: </p>
@@ -61,7 +64,6 @@ export default function TaskModal({ task, onClose }: EditTaskModalProps) {
             </select>
           </div>
         )}
-        <DeleteIcon onClick={() => handleDelete(task)} />
         <input
           type="text"
           placeholder="Title"

@@ -15,19 +15,19 @@
     background-color: $taskCard-color;
     width: 95%;
     height: auto;
-    padding: 1rem;
-    border-radius: 10px;
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
     cursor: pointer;
     word-wrap: break-word;
     overflow-wrap: anywhere;
     white-space: normal;
 
     .taskTitle {
-      margin-bottom: 20px;
+      margin-bottom: $spacing-xl;
     }
   }
 
   .taskCard:hover {
-    background-color: azure;
+    background-color: $secondary-color;
   }
 }

@@ -28,21 +28,23 @@ export default function ArchiveModal({ onClose }: ArchiveModalProps) {
           ) : (
             archive?.map((task) => (
               <div key={task.id} className={modalStyles.archivedTask}>
-                <p
-                  className={`${modalStyles.status} ${
-                    task.status === "TODO"
-                      ? modalStyles.todo
-                      : task.status === "IN_PROGRESS"
-                      ? modalStyles.inProgress
-                      : task.status === "DONE"
-                      ? modalStyles.done
-                      : ""
-                  }`}
-                >
-                  {task.status}
-                </p>
-                <div className={modalStyles.archiveDeleteIcon}>
-                  <DeleteIcon onClick={() => handleDelete(task)} />
+                <div className={modalStyles.archivedTaskHeader}>
+                  <p
+                    className={`${modalStyles.status} ${
+                      task.status === "TODO"
+                        ? modalStyles.todo
+                        : task.status === "IN_PROGRESS"
+                        ? modalStyles.inProgress
+                        : task.status === "DONE"
+                        ? modalStyles.done
+                        : ""
+                    }`}
+                  >
+                    {task.status}
+                  </p>
+                  <div className={modalStyles.archiveDeleteIcon}>
+                    <DeleteIcon onClick={() => handleDelete(task)} />
+                  </div>
                 </div>
 
                 <h3>{task.title}</h3>

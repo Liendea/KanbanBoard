@@ -3,6 +3,7 @@ import { useKanban } from "../context/KanbanContext";
 import ArchiveModal from "./ArchiveModal";
 import ArchiveIcon from "../icons/ArchiveIcon";
 import SmallDeviceMenu from "./SmallDeviceMenu";
+import "../styles/Global.scss";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const [showArchiveModal, setShowArchiveModal] = useState(false);
@@ -15,7 +16,11 @@ function Layout({ children }: { children: React.ReactNode }) {
         <SmallDeviceMenu />
       ) : (
         <>
-          <ArchiveIcon onClick={() => setShowArchiveModal(!showArchiveModal)} />
+          <div className="appArchiveIcon">
+            <ArchiveIcon
+              onClick={() => setShowArchiveModal(!showArchiveModal)}
+            />
+          </div>
           {showArchiveModal && (
             <ArchiveModal onClose={() => setShowArchiveModal(false)} />
           )}
