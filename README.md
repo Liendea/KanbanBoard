@@ -10,6 +10,8 @@ Desktop:
 Small devices:
 
 <img width="306" height="563" alt="Skärmbild 2025-09-20 klockan 10 29 28 fm" src="https://github.com/user-attachments/assets/47656bc5-bffe-4e29-bfcf-f0ce7547b7be" />
+<img width="306" height="563" alt="Skärmbild 2025-09-20 klockan 10 32 24 fm" src="https://github.com/user-attachments/assets/69bc8fad-7e05-44f0-8f97-3838c15d72ac" />
+<img width="306" height="563" alt="Skärmbild 2025-09-20 klockan 10 31 59 fm" src="https://github.com/user-attachments/assets/f87146fc-22a3-4be5-805a-0358d3b9eb22" />
 
 ---
 
