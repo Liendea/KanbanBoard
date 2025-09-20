@@ -61,7 +61,7 @@ src/
 
 
 
-
+---
 
 Vidare utveckling:
 
@@ -77,6 +77,8 @@ Vidare utveckling:
 ⬜ Dra och släpp kolumner (inte bara tasks)
 
 
+
+---
 
 
 Utvecklad av : Linda Bengtsson
