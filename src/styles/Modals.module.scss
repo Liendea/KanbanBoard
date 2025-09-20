@@ -34,6 +34,10 @@
   }
 
   @include tablet {
+    width: 60%;
+    padding: $spacing-lg;
+  }
+  @include mobile {
     width: 95%;
     padding: $spacing-lg;
   }
@@ -61,7 +65,6 @@
 
 .archiveModal {
   height: auto;
-  max-height: 60%;
 
   .taskContainer {
     display: flex;

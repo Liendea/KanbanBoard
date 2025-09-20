@@ -83,6 +83,12 @@ button {
   margin-top: $spacing-lg;
 }
 
+.closeArchiveBtn {
+  margin-top: auto;
+  margin-bottom: $spacing-md;
+}
+
+// Logik inte skapad för denna knapp ännu
 .resetBtn {
   margin-top: $spacing-lg;
   background-color: $primary-color;

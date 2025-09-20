@@ -10,7 +10,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   const { isMobileView } = useKanban();
 
   return (
-    <div className="Layout">
+    <>
       {/* Navigation */}
       {isMobileView ? (
         <SmallDeviceMenu />
@@ -29,7 +29,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Sidinnehåll */}
       <main>{children}</main>
-    </div>
+    </>
   );
 }
 

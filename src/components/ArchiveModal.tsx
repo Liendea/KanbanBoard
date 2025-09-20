@@ -55,7 +55,9 @@ export default function ArchiveModal({ onClose }: ArchiveModalProps) {
           )}
         </div>
 
-        <button onClick={onClose}>Close</button>
+        <button className="closeArchiveBtn" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );
