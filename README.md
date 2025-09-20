@@ -60,7 +60,12 @@ src/
 
 
 
+
+
+
 Vidare utveckling:
+
+
 ⬜ Filtrering/sökfunktion för tasks
 
 ⬜ Möjlighet att ändra färger/teman
