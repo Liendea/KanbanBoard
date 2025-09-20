@@ -41,25 +41,43 @@ Small devices:
 
 ## 📂 Projektstruktur (förenklad)
 
+
 src/
+
 ├── components/ # Återanvändbara UI-komponenter (Column, TaskCard, Modals)
+
 ├── context/ # Global KanbanContext
+
 ├── hooks/ # Custom hooks (useDnd, useKanbanModals, etc.)
+
 ├── constants/ # T.ex. COLUMNS definition
+
 ├── styles/ # SCSS-moduler
+
 ├── types/ # TypeScript-typer
+
 └── App.tsx # Rotkomponent
+
 
 
 Vidare utveckling:
 ⬜ Filtrering/sökfunktion för tasks
+
 ⬜ Möjlighet att ändra färger/teman
+
 ⬜ Möjlighet att återställa arkiverade uppgifter
+
 ⬜ Spara data i Local Storage eller backend
+
 ⬜ Dra och släpp kolumner (inte bara tasks)
 
 
+
+
 Utvecklad av : Linda Bengtsson
+
 mail: bengtsson.linda-outlook.com
+
 instagram: liendea.dev
+
 
