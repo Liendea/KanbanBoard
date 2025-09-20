@@ -1,27 +1,26 @@
-import type { ColumnType, TaskType } from "../types/Types";
+import type { ColumnId, ColumnType, TaskType } from "../types/Types";
 import TaskCard from "./TaskCard";
-import { useState } from "react";
 import EditIcon from "../icons/EditIcon";
 import SaveIcon from "../icons/SaveIcon";
-
 import PlusIcon from "../icons/PlusIcon";
+import { useKanban } from "../context/KanbanContext";
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
-import { useKanban } from "../context/KanbanContext";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Column.module.scss";
 import taskStyles from "../styles/Task.module.scss";
 import "../styles/Global.scss";
+import { useEditTitle } from "../hooks/useEditTitle";
 
 type ColumnProps = {
   column: ColumnType;
   columnIndex: number;
   onClick?: () => void;
   onClickTask?: (task: TaskType) => void;
-  onAddTask?: (columnId: string) => void;
+  onAddTask?: (columnId: ColumnId) => void;
 };
 
 export default function Column({
@@ -31,31 +30,25 @@ export default function Column({
   onAddTask,
   onClickTask,
 }: ColumnProps) {
-  const { tasks, columnTitles, setColumnTitles } = useKanban();
-  const storedColumnTitle = columnTitles?.[columnIndex] ?? column.title;
-
+  const { tasks } = useKanban();
   const navigate = useNavigate();
+
+  // använd custom editTitle hook
+  const {
+    editTitleMode,
+    setEditTitleMode,
+    columnTitle,
+    setColumnTitle,
+    saveTitle,
+  } = useEditTitle(columnIndex, column.title);
 
   // Filtera tasks för just denna kolumn
   const columnTasks = tasks?.filter((task) => task.status === column.id) ?? [];
-
-  const [editTitleMode, setEditTitleMode] = useState(false);
-  const [columnTitle, setColumnTitle] = useState(storedColumnTitle);
 
   // gör hela kolumnen till en droppable
   const { setNodeRef } = useDroppable({
     id: column.id,
   });
-
-  // Spar ny titel
-  function saveTitle() {
-    setEditTitleMode(false);
-    if (!setColumnTitles) return;
-
-    setColumnTitles((prev) =>
-      prev.map((title, idx) => (idx === columnIndex ? columnTitle : title))
-    );
-  }
 
   return (
     <div ref={setNodeRef} className={styles.column}>

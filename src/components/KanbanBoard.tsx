@@ -1,37 +1,36 @@
 import { useState } from "react";
-import Column from "./Column";
-import type { ColumnId, ColumnType } from "../types/Types";
 import { useNavigate, useParams } from "react-router-dom";
-import columnStyles from "../styles/Column.module.scss";
-import "../styles/Global.scss";
 import { DndContext, rectIntersection } from "@dnd-kit/core";
 import { useDnd } from "../hooks/useDnd";
+import Column from "./Column";
+import type { ColumnId } from "../types/Types";
+import columnStyles from "../styles/Column.module.scss";
+import "../styles/Global.scss";
 import { useKanban } from "../context/KanbanContext";
 import AddTaskModal from "./AddTaskModal";
 import EditTaskModal from "./EditTaskModal";
-import type { TaskType } from "../types/Types";
-
-const COLUMNS: ColumnType[] = [
-  { id: "TODO", title: "To do" },
-  { id: "IN_PROGRESS", title: "In Progress" },
-  { id: "DONE", title: "Done" },
-];
+import { useKanbanModals } from "../hooks/useKanbanModals";
+import { COLUMNS } from "../constants/columns";
 
 export default function KanbanBoard() {
   const { isMobileView } = useKanban();
   const { columnId } = useParams();
   const navigate = useNavigate();
-  //DND hook
-  const { sensors, handleDragEnd } = useDnd(COLUMNS);
+  const { sensors, handleDragEnd } = useDnd(COLUMNS); //DND hook
+
+  // custom KanbanModal hook
+  const {
+    showAddModal,
+    showEditModal,
+    selectedTask,
+    activeColumnId,
+    openAddModal,
+    openEditModal,
+    closeModals,
+  } = useKanbanModals();
 
   // Desktop: hantera detaljvy
   const [detailColumnId, setDetailColumnId] = useState<string | null>(null);
-
-  // Modal state
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<TaskType | null>(null);
-  const [activeColumnId, setActiveColumnId] = useState<string | null>(null);
 
   // Mobilvy: URL styr kolumnen
   const activeColumn = columnId
@@ -40,21 +39,6 @@ export default function KanbanBoard() {
     ? COLUMNS[0]
     : null;
 
-  function openAddModal(columnId: string) {
-    setActiveColumnId(columnId);
-    setShowAddModal(true);
-  }
-
-  function openEditModal(task: TaskType) {
-    setSelectedTask(task);
-    setShowEditModal(true);
-  }
-
-  function closeModals() {
-    setShowAddModal(false);
-    setShowEditModal(false);
-    setSelectedTask(null);
-  }
   function closeDetailView() {
     setDetailColumnId(null);
     navigate("/kanban");
