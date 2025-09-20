@@ -86,6 +86,12 @@ button {
 .closeArchiveBtn {
   margin-top: auto;
   margin-bottom: $spacing-md;
+  width: 50%;
+
+  // Media query för mobil
+  @media (max-width: 900px) {
+    width: 90%;
+  }
 }
 
 // Logik inte skapad för denna knapp ännu
